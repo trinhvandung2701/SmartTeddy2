@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SmartTeddy</string>
+    <string name="app_intro_skip">Skip</string>
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="nhacvn">Hát Ru Truyền Thống</string>
+    <string name="nhacnn">Hát Ru Ngoại Quốc</string>
+    <string name="ketruyen">Truyển Kể</string>
+    <string name="cauthoai">Câu Thoại</string>
+
+
+</resources>
