@@ -36,7 +36,7 @@
             android:paddingTop="2dp"/>
 
         <TextView
-            android:layout_width="15dp"
+            android:layout_width="10dp"
             android:layout_height="match_parent" />
 
         <ImageView
@@ -54,13 +54,13 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnNhacVN"
+            android:id="@+id/btnMusicVN"
             android:layout_width="190dp"
             android:layout_height="230dp"
             android:text="@string/nhacvn"/>
 
         <Button
-            android:id="@+id/btnNhacNN"
+            android:id="@+id/btnMusicEN"
             android:layout_width="194dp"
             android:layout_height="230dp"
             android:text="@string/nhacnn" />
@@ -72,13 +72,13 @@
         >
 
         <Button
-            android:id="@+id/btnKeTruyen"
+            android:id="@+id/btnStory"
             android:layout_width="190dp"
             android:layout_height="256dp"
             android:text="@string/ketruyen"/>
 
         <Button
-            android:id="@+id/btnCauThoai"
+            android:id="@+id/btnConversation"
             android:layout_width="194dp"
             android:layout_height="256dp"
             android:text="@string/cauthoai"/>
