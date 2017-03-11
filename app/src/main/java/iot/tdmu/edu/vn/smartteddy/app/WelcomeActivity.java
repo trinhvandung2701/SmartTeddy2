@@ -1,9 +1,13 @@
 package iot.tdmu.edu.vn.smartteddy.app;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +21,12 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import iot.tdmu.edu.vn.smartteddy.intro.Session;
 
@@ -30,10 +40,17 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button btnSkip,btnNext;
     private Session session;
 
+    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        if(Build.VERSION.SDK_INT >= 23){
+            checkMultiplePermissions();
+        }
+
 
         // Checking for first time launch - before calling setContentView()
         session = new Session(this);
@@ -88,6 +105,89 @@ public class WelcomeActivity extends AppCompatActivity {
                 launchHomeScreen();
             }
         });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorPrimaryDark));
+        }
+    }
+
+    private void checkMultiplePermissions() {
+        if (Build.VERSION.SDK_INT >= 23){
+            List<String> permissionsNeeded = new ArrayList<>();
+            List<String> permissionsList = new ArrayList<>();
+
+            if (!addPermission(permissionsList, android.Manifest.permission.ACCESS_FINE_LOCATION)){
+                permissionsNeeded.add("GPS");
+            }
+            if (!addPermission(permissionsList, android.Manifest.permission.ACCESS_WIFI_STATE)){
+                permissionsNeeded.add("WIFI");
+            }
+            if (!addPermission(permissionsList, android.Manifest.permission.READ_PHONE_STATE)){
+                permissionsNeeded.add("PHONE");
+            }
+            if (!addPermission(permissionsList, android.Manifest.permission.MEDIA_CONTENT_CONTROL)){
+                permissionsNeeded.add("MEDIA");
+            }
+            if (!addPermission(permissionsList, android.Manifest.permission.CHANGE_WIFI_STATE)){
+                permissionsNeeded.add("WIFI_STATE");
+            }
+            if (!addPermission(permissionsList, android.Manifest.permission.INTERNET)){
+                permissionsNeeded.add("INTERNET");
+            }
+
+            if (permissionsList.size() > 0){
+                requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
+                        REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS);
+            }
+        }
+    }
+
+    private boolean addPermission(List<String> permissionsList, String permission) {
+        if (Build.VERSION.SDK_INT >= 23){
+            if(checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED){
+                permissionsList.add(permission);
+
+                //check for Rationable Option
+                if (!shouldShowRequestPermissionRationale(permission)){
+                    return false;
+                }
+
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS:
+                Map<String,Integer> perms = new HashMap<String,Integer>();
+                perms.put(android.Manifest.permission.ACCESS_FINE_LOCATION,PackageManager.PERMISSION_GRANTED);
+                perms.put(android.Manifest.permission.INTERNET,PackageManager.PERMISSION_GRANTED);
+
+                for (int i = 0; i < permissions.length;i++){
+                    perms.put(permissions[i],grantResults[i]);
+                }
+                if (perms.get(android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                        perms.get(Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED
+                        &&perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED){
+                    return;
+                } else {
+                    if (Build.VERSION.SDK_INT >= 23) {
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "My App cannot run without cannot operate!" +
+                                        "\nRelaunch My App or allow permissions" +
+                                        " in Applications Settings",
+                                Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     private void changeStatusBarColor() {
@@ -119,7 +219,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         session.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, ConnectTeddyActivity.class));
+        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
         finish();
     }
 
