@@ -134,6 +134,9 @@ public class WelcomeActivity extends AppCompatActivity {
             if (!addPermission(permissionsList, android.Manifest.permission.INTERNET)){
                 permissionsNeeded.add("INTERNET");
             }
+            if (!addPermission(permissionsList, Manifest.permission.CAMERA)){
+                permissionsNeeded.add("CAMERA");
+            }
 
             if (permissionsList.size() > 0){
                 requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
@@ -165,13 +168,14 @@ public class WelcomeActivity extends AppCompatActivity {
                 Map<String,Integer> perms = new HashMap<String,Integer>();
                 perms.put(android.Manifest.permission.ACCESS_FINE_LOCATION,PackageManager.PERMISSION_GRANTED);
                 perms.put(android.Manifest.permission.INTERNET,PackageManager.PERMISSION_GRANTED);
-
+                perms.put(Manifest.permission.CAMERA,PackageManager.PERMISSION_GRANTED);
                 for (int i = 0; i < permissions.length;i++){
                     perms.put(permissions[i],grantResults[i]);
                 }
                 if (perms.get(android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                         perms.get(Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED
-                        &&perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED){
+                        &&perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
+                        &&perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
                     return;
                 } else {
                     if (Build.VERSION.SDK_INT >= 23) {
@@ -219,7 +223,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         session.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+        startActivity(new Intent(WelcomeActivity.this, ConectTeddybyQR_Activity.class));
         finish();
     }
 
