@@ -149,7 +149,6 @@ public class WifiHotspot {
             if(wifiManager.startScan()){
                 return wifiManager.getScanResults();
             }
-
         }
         return null;
     }

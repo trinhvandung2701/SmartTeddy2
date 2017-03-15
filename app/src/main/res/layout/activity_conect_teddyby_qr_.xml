@@ -23,5 +23,12 @@
         android:textSize="25sp"
         android:padding="5dp"
         android:gravity="center_horizontal"/>
+    <Button
+        android:id="@+id/btnConnectQR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/result"/>
+
+
 
 </RelativeLayout>

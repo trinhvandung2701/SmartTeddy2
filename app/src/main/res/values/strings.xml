@@ -12,5 +12,7 @@
     <string name="ketruyen">Truyển Kể</string>
     <string name="cauthoai">Câu Thoại</string>
 
+    <string name="none_paired">No devices have been paired</string>
+
 
 </resources>

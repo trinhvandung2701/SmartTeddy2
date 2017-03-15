@@ -30,30 +30,30 @@ import java.util.Map;
 
 import iot.tdmu.edu.vn.smartteddy.intro.Session;
 
-public class WelcomeActivity extends AppCompatActivity {
+        public class WelcomeActivity extends AppCompatActivity {
 
-    private ViewPager viewPager;
-    private MyViewPagerAdapter myViewPagerAdapter;
-    private LinearLayout dotsLayout;
-    private TextView[] dots;
-    private int[] layouts;
-    private Button btnSkip,btnNext;
-    private Session session;
+            private ViewPager viewPager;
+            private MyViewPagerAdapter myViewPagerAdapter;
+            private LinearLayout dotsLayout;
+            private TextView[] dots;
+            private int[] layouts;
+            private Button btnSkip,btnNext;
+            private Session session;
 
-    final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
+            final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_welcome);
 
-        if(Build.VERSION.SDK_INT >= 23){
-            checkMultiplePermissions();
-        }
+                if(Build.VERSION.SDK_INT >= 23){
+                    checkMultiplePermissions();
+                }
 
 
-        // Checking for first time launch - before calling setContentView()
-        session = new Session(this);
+                // Checking for first time launch - before calling setContentView()
+                session = new Session(this);
         if(!session.isFirstTimeLaunch()){
             launchHomeScreen();
             finish();
@@ -137,6 +137,9 @@ public class WelcomeActivity extends AppCompatActivity {
             if (!addPermission(permissionsList, Manifest.permission.CAMERA)){
                 permissionsNeeded.add("CAMERA");
             }
+            if (!addPermission(permissionsList, Manifest.permission.BLUETOOTH)){
+                permissionsNeeded.add("BLUETOOTH");
+            }
 
             if (permissionsList.size() > 0){
                 requestPermissions(permissionsList.toArray(new String[permissionsList.size()]),
@@ -169,13 +172,15 @@ public class WelcomeActivity extends AppCompatActivity {
                 perms.put(android.Manifest.permission.ACCESS_FINE_LOCATION,PackageManager.PERMISSION_GRANTED);
                 perms.put(android.Manifest.permission.INTERNET,PackageManager.PERMISSION_GRANTED);
                 perms.put(Manifest.permission.CAMERA,PackageManager.PERMISSION_GRANTED);
+                perms.put(Manifest.permission.BLUETOOTH,PackageManager.PERMISSION_GRANTED);
                 for (int i = 0; i < permissions.length;i++){
                     perms.put(permissions[i],grantResults[i]);
                 }
                 if (perms.get(android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                         perms.get(Manifest.permission.INTERNET) == PackageManager.PERMISSION_GRANTED
                         &&perms.get(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
-                        &&perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                        &&perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                        &&perms.get(Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED){
                     return;
                 } else {
                     if (Build.VERSION.SDK_INT >= 23) {
@@ -223,7 +228,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         session.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, ConectTeddybyQR_Activity.class));
+        startActivity(new Intent(WelcomeActivity.this, Scan_BlutoothActivity.class));
         finish();
     }
 

@@ -6,14 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="iot.tdmu.edu.vn.smartteddy.app.RequestActivity">
-
-    <Button
-        android:layout_marginLeft="120dp"
-        android:id="@+id/btnScan"
-        android:layout_width="120dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Scan Wifi"
-        android:theme="@style/MyButton"/>
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <Button
+            android:id="@+id/btnScan"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Scan Wifi"
+            android:theme="@style/MyButton"/>
+
+        <Button
+            android:id="@+id/btnQR"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Scan QR Code"
+            android:theme="@style/MyButton"
+            android:layout_weight="0.27" />
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/lvListHotspot"
