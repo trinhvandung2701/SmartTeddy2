@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="iot.tdmu.edu.vn.smartteddy.app.MainActivity"
+    android:background="#1365fa">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:weightSum="1"
+        android:layout_marginBottom="0dp"
+        android:background="#4104f4"
+
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/teddytrai" />
+
+        <Switch
+            android:id="@+id/mySwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:textOn="APP"
+            android:layout_marginTop="10dp"
+            android:thumb="@drawable/customswitchselector"
+            android:track="@drawable/custom_track"
+            android:textOff="TEDDY"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="2dp"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.04"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/teddyphai" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SMART - TEDDY"
+        android:id="@+id/textView"
+        android:layout_marginTop="20dp"
+        android:textSize="30dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#b9c0fc">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnMusicVN"
+                android:layout_width="150dp"
+                android:layout_height="230dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="7dp"
+                android:text="@string/nhacvn"
+                android:src="@drawable/hatrutruyenthong" />
+
+            <ImageButton
+                android:id="@+id/btnMusicEN"
+                android:layout_width="150dp"
+                android:layout_height="230dp"
+                android:text="@string/nhacnn"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/hatrungoaiquoc" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <ImageButton
+                android:id="@+id/btnStory"
+                android:layout_width="150dp"
+                android:layout_height="230dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="7dp"
+                android:text="@string/ketruyen"
+                android:src="@drawable/chuyenkechobe" />
+
+            <ImageButton
+                android:id="@+id/btnConversation"
+                android:layout_width="150dp"
+                android:layout_height="230dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="7dp"
+                android:src="@drawable/cauthoai"
+                android:text="@string/cauthoai"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
